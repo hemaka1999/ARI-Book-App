@@ -15,7 +15,7 @@ use App\Http\Controllers\BookController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
 Route::get('book-list', [BookController::class, 'index'] );
 Route::get('add-book', [BookController::class, 'addBook'] );
@@ -25,3 +25,7 @@ Route::post('update-book', [BookController::class, 'updateBook'] );
 Route::get('delete-book/{id}', [BookController::class, 'deleteBook'] );
 
 
+
+Auth::routes();
+
+Route::get('/book-list', [App\Http\Controllers\BookController::class, 'index'])->name('book-list');
