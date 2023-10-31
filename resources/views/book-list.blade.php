@@ -12,13 +12,18 @@
         <div class="row">
             <div class="col-md-12">
                 <h2>Book List</h2>
+                @if (Session::has('success'))
+                    <div class="alert alert-success" role="alert">
+                        {{ Session::get('success') }}
+                    </div>
+                @endif
                 <div style="margin-right: 10%; float:right">
                     <a href="{{url('add-book')}}" class="btn btn-primary">Add Book</a>
                 </div>
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th>Book ID</th>
                             <th>Title</th>
                             <th>Author</th>
                             <th>Price</th>
@@ -32,12 +37,12 @@
                         @endphp
                         @foreach ($data as $book)
                         <tr>
-                            <td>{{$i}}</td>
+                            <td>{{$i++}}</td>
                             <td>{{$book->title}}</td>
                             <td>{{$book->author}}</td>
                             <td>{{$book->price}}</td>
                             <td>{{$book->stock}}</td>
-                            <td>Edit | Delete</td>
+                            <td><a href="{{url('edit-book/'.$book->id)}}" class="btn btn-primary">Edit</a> | <a href="{{url('delete-book/'.$book->id)}}" class="btn btn-danger">Delete</a></td>
                         </tr>
 
                         @endforeach

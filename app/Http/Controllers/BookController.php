@@ -58,4 +58,40 @@ class BookController extends Controller
 
     return redirect()->back()->with('success', 'Book Added Successfully!');
     }
+
+    public function editBook($id){
+        $data = Book::where('id','=',$id)->first();
+        return view('edit-book',compact('data'));
+    }
+
+    public function updateBook(Request $request){
+        $request -> validate([
+            'title' => 'required',
+        'author' => 'required',
+        'price' => 'required|numeric',
+        'stock' => 'required|integer',
+        ]);
+
+        $id = $request->id;
+        $title = $request->title;
+    $author = $request->author;
+    $price = $request->price;
+    $stock = $request->stock;
+
+    Book::where('id','=',$id)->update([
+        'title'=>$title,
+        'author'=>$author,
+        'price'=>$price,
+        'stock'=>$stock
+    ]);
+
+    return redirect()->back()->with('success', 'Book Updated Successfully!');
+
+
+    }
+
+    public function deleteBook($id){
+        Book::where('id','=',$id)->delete();
+        return redirect()->back()->with('success', 'Book Deleted Successfully!');
+    }
 }

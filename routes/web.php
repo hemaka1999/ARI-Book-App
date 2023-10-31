@@ -20,4 +20,8 @@ Route::get('/', function () {
 Route::get('book-list', [BookController::class, 'index'] );
 Route::get('add-book', [BookController::class, 'addBook'] );
 Route::post('save-book', [BookController::class, 'saveBook'] );
+Route::get('edit-book/{id}', [BookController::class, 'editBook'] );
+Route::post('update-book', [BookController::class, 'updateBook'] );
+Route::get('delete-book/{id}', [BookController::class, 'deleteBook'] );
+
 
